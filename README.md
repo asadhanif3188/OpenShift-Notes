@@ -72,3 +72,23 @@ Note that system users can be identified by a system prefix on the usernames.
 They are created as needed for each project. These user accounts are for enabling communication between various services within our application, for example, an account used by the web server for accessing the database. 
 
 Service accounts have a prefix of system service account on the usernames, e.g. `system:serviceaccount:projj1:db_user`. OpenShift master includes a built-in OAuth server that is responsible for authenticating and authorizating users into the OpenShift cluster. For All in One mode of setup, such as the one we deployed with minishift, the default OAuth configuration is set to an *Allow All* identity provider, that allows any user to log in with any password. If the user doesn't exist with the system, it is automatically created when the user tries to log in for the first time. The password is never varified in this setup. In case of advanced installation, the *Deny All* provider is used, and this denies access for all users. The administrator then needs to manually create and enable new users. This behavior can be changed by modifying the master configuration file, located at `/etc/openshift/master/master-config.yaml`. 
+
+### Creating Users 
+Log into the CLI using the `OC login` command. 
+
+`oc login -u system:admin` 
+
+**Note:** `system:admin` is the username. 
+
+To see the list of project, use following command. 
+
+`oc get projects`
+
+To see the list of user, use following command. 
+
+`oc get users`
+
+To assign `cluster-admin` role to `administrator` user, use following command. 
+
+`oc adm policy add-cluster-role-to-user cluster-admin administrator`
+
