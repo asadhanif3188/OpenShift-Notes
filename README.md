@@ -46,3 +46,29 @@ To see list of Pods, run the command:
 `oc get pods`
 
 **Note:** In OpenShift `oc` mimics the `kubectl` of K8s. 
+
+# Openshift Concepts
+
+## Projects and Users
+A large Kubernetes cluster can host lots of Pods in hundreds of deployments with various services and endpoints configured. The same large infrastructure can be shared by various teams working on different applications. Sharing the same infrastructure with different teams, however, may not be a good idea as there are no restrictions as to who can access what resources since the entire platform is shared between different teams. Users will also need to coordinate on the names they use for their applications, as this setup does not allow for two users to create a deployment or serice with the same name. 
+
+A project in OpenShift allow users to organize and manage their contents in the OpenShift environment. It helps teams isolate their work from other teams sharing the same infratructure. It allows us to manage access to resources for various users. Projects are built on top of Kubernetes constructs known as namespaces. Using namespaces, K8s automatically prefixes a name of our choice to the objects we create in our namespace, thereby providing some basic grouping functionality for resources. OpenShift projects builds on this functionality to provide complete grouping and isolation of resources that is seamless to users. The user simple creates a project and deploys the application and no longer worry about managing namespaces underneath. All of that is taken care by OpenShift automatically. 
+
+OpenShift comes with built-in user management features. There are three types of users available:
+1. Regular User
+2. System User
+3. Service Accounts
+
+#### 1. Regular User
+
+Regular user are developers and others who interact with OpenShift for developing and deploying applications on a regular basis. They so simple by the name of the users, such as *`developer`*. 
+
+#### 2. System User
+
+System useras are used for interacting with the inftrastructure, such as cluster administrator or a user created for each node in the cluster. OpenShift creates some of these users by default, such as the *`system admin`* and *`system master`* users. 
+Note that system users can be identified by a system prefix on the usernames. 
+
+#### 3. Service Accounts
+They are created as needed for each project. These user accounts are for enabling communication between various services within our application, for example, an account used by the web server for accessing the database. 
+
+Service accounts have a prefix of system service account on the usernames, e.g. `system:serviceaccount:projj1:db_user`. OpenShift master includes a built-in OAuth server that is responsible for authenticating and authorizating users into the OpenShift cluster. For All in One mode of setup, such as the one we deployed with minishift, the default OAuth configuration is set to an *Allow All* identity provider, that allows any user to log in with any password. If the user doesn't exist with the system, it is automatically created when the user tries to log in for the first time. The password is never varified in this setup. In case of advanced installation, the *Deny All* provider is used, and this denies access for all users. The administrator then needs to manually create and enable new users. This behavior can be changed by modifying the master configuration file, located at `/etc/openshift/master/master-config.yaml`. 
