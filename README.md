@@ -3,6 +3,16 @@
 ## Description
 Red Hat OpenShift is an open-source container application platform for developing and hosting enterprise-grade applications. OpenShift is Red Hat's Platform as a Service (PaaS) offering. Once deployed, OpenShift takes care of managing the underlying infrastructure components, thereby enabling the developers to do what they do best: code. 
 
+One of the key features of OpenShift is its ability to simplify the process of deploying and scaling applications. With OpenShift, developers can easily create application images and deploy them to the platform, which will automatically manage the container environment, including scaling and load balancing.
+
+OpenShift also provides a number of tools for managing the container environment, including monitoring and logging tools, as well as tools for managing access and security. Additionally, OpenShift supports a wide range of programming languages and frameworks, making it a flexible platform for building and deploying applications.
+
+Some of the other features of OpenShift include:
+- Self-service application deployment: Developers can easily deploy applications to OpenShift without needing to go through a centralized IT team.
+- Built-in security: OpenShift includes a number of security features, including secure container images and integrated authentication and authorization.
+- Multi-cloud support: OpenShift can be deployed on a variety of infrastructure, including on-premises data centers, public clouds, and hybrid clouds.
+- Community support: OpenShift has a large and active community of users and contributors, providing a wealth of resources and support for developers.
+
 OpenShift has **four** different flavors:
 1. **OpenShift Origin**: Open source application container platform. 
 2. **OpenShift Online**: It is Red Hat's publically hosted version of OpenShift Origin, available for application development and hosting purposes. 
