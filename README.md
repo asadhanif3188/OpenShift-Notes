@@ -102,3 +102,21 @@ To assign `cluster-admin` role to `administrator` user, use following command.
 
 `oc adm policy add-cluster-role-to-user cluster-admin administrator`
 
+## OpenShift vs. K8s Components 
+OpenShift is an orchestrator that gives us the ability to control anything from users, projects, which are just namespaces in Kubernetes, application deployments, services, routes, ingress, builds, we have the console to control things with, also the CLI to control things with. 
+
+So that is the difference between OpenShift and Kubernets? 
+
+With Kubernetes, we as a user interact directly with K8s API server, because there are many different APIs and different ways to extend the API landscape it comes to Kubernetes. With OpenShift, we have all of these components, i.e. control place, ETCD, Pods, Deployments, etc. OpenShift actually running k8s in the background. The user interacting with OpenShift, and then OpenShift send request from a user to Kubernetes. So, OpenShift is the platform that sits on top of Kubernetes. Kubernetes is abstracted away from the user. That's why OpenShift is considered PaaS, because user interact directly to OpenShift.  
+
+## Deployment and a DeploymentConfig
+In OpenShift, a Deployment and a DeploymentConfig are two different types of objects used to manage the deployment of containerized applications.
+
+A Deployment is a Kubernetes object that describes a set of replicas of a containerized application that should be running at any given time. When you create a Deployment, you specify the container image to use, the number of replicas to create, and other settings related to the application's deployment.
+
+A DeploymentConfig, on the other hand, is a custom object that is specific to OpenShift. It is similar to a Deployment in that it describes a set of replicas of a containerized application, but it includes additional features that are specific to OpenShift. For example, a DeploymentConfig can include triggers that cause the application to be redeployed based on changes to the source code, configuration settings, or other parameters.
+
+Another difference between Deployments and DeploymentConfigs is the way they handle updates. With Deployments, updates to the container image or other settings trigger a rolling update, which updates the replicas of the application one at a time to minimize downtime. With DeploymentConfigs, updates are typically done using a strategy called a rolling deployment, which updates the replicas of the application in a more controlled and customizable way.
+
+In general, Deployments are a more basic Kubernetes object that provide a simple way to manage the deployment of containerized applications, while DeploymentConfigs are a more advanced OpenShift-specific object that provides additional features and customization options.
+
