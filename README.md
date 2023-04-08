@@ -120,3 +120,9 @@ Another difference between Deployments and DeploymentConfigs is the way they han
 
 In general, Deployments are a more basic Kubernetes object that provide a simple way to manage the deployment of containerized applications, while DeploymentConfigs are a more advanced OpenShift-specific object that provides additional features and customization options.
 
+## Build and a BuildConfig
+At a hight level a build essentially takes code and transforms that code into a container image. We can use that container image and can run it across entire application process, whether it's frontend, middleware and backend. We write that code, then that code gets transformed into a build so that build can be a container images. 
+
+This is same thing as, for example, having a Dockerfile, and when we run `docker build` command and it creates that container image. That's a container image creation process, very much the same as an OpenShift build. 
+
+Now, a build config is the actual configuration that takes place to take that source code and create a container image of it. Typically, these build configs are automatically created for us via a build strategy. This build config file is typically created automatically, so we don't have to manually create it.  
