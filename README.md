@@ -33,6 +33,54 @@ OpenShift has **four** different flavors:
 - OpenShift is API-centric and has a rich and well documneted set of APIs that helps us easily integrate OpenShift with our existing infrastructure. 
 - OpenShift provides out-of-box support for projects, teams, and users to organiza and manage access to applications.
 
+
+## Glossary of common terms for OpenShift Container Platform
+This glossary defines common Kubernetes and OpenShift Container Platform terms. 
+
+[Documentation Reference](https://docs.openshift.com/container-platform/4.10/getting_started/openshift-overview.html)
+
+### Kubernetes
+Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized applications.
+
+### Containers
+Containers are application instances and components that run in OCI-compliant containers on the worker nodes. A container is the runtime of an Open Container Initiative (OCI)-compliant image. An image is a binary application. A worker node can run many containers. A node capacity is related to memory and CPU capabilities of the underlying resources whether they are cloud, hardware, or virtualized.
+
+### Pod
+A pod is one or more containers deployed together on one host. It consists of a colocated group of containers with shared resources such as volumes and IP addresses. A pod is also the smallest compute unit defined, deployed, and managed.
+
+In OpenShift Container Platform, pods replace individual application containers as the smallest deployable unit.
+
+Pods are the orchestrated unit in OpenShift Container Platform. OpenShift Container Platform schedules and runs all containers in a pod on the same node. Complex applications are made up of many pods, each with their own containers. They interact externally and also with another inside the OpenShift Container Platform environment.
+
+### Replica set and Replication Controller
+The Kubernetes replica set and the OpenShift Container Platform replication controller are both available. The job of this component is to ensure the specified number of pod replicas are running at all times. If pods exit or are deleted, the replica set or replication controller starts more. If more pods are running than needed, the replica set deletes as many as necessary to match the specified number of replicas.
+
+### Deployment and DeploymentConfig
+OpenShift Container Platform implements both Kubernetes Deployment objects and OpenShift Container Platform DeploymentConfigs objects. Users may select either.
+
+Deployment objects control how an application is rolled out as pods. They identify the name of the container image to be taken from the registry and deployed as a pod on a node. They set the number of replicas of the pod to deploy, creating a replica set to manage the process. The labels indicated instruct the scheduler onto which nodes to deploy the pod. The set of labels is included in the pod definition that the replica set instantiates.
+
+Deployment objects are able to update the pods deployed onto the worker nodes based on the version of the Deployment objects and the various rollout strategies for managing acceptable application availability. OpenShift Container Platform DeploymentConfig objects add the additional features of change triggers, which are able to automatically create new versions of the Deployment objects as new versions of the container image are available, or other changes.
+
+### Service
+A service defines a logical set of pods and access policies. It provides permanent internal IP addresses and hostnames for other applications to use as pods are created and destroyed.
+
+Service layers connect application components together. For example, a front-end web service connects to a database instance by communicating with its service. Services allow for simple internal load balancing across application components. OpenShift Container Platform automatically injects service information into running containers for ease of discovery.
+
+### Route
+A route is a way to expose a service by giving it an externally reachable hostname, such as www.example.com. Each route consists of a route name, a service selector, and optionally a security configuration. A router can consume a defined route and the endpoints identified by its service to provide a name that lets external clients reach your applications. While it is easy to deploy a complete multi-tier application, traffic from anywhere outside the OpenShift Container Platform environment cannot reach the application without the routing layer.
+
+### Build
+A build is the process of transforming input parameters into a resulting object. Most often, the process is used to transform input parameters or source code into a runnable image. A BuildConfig object is the definition of the entire build process. OpenShift Container Platform leverages Kubernetes by creating containers from build images and pushing them to the integrated registry.
+
+### Project
+OpenShift Container Platform uses projects to allow groups of users or developers to work together, serving as the unit of isolation and collaboration. It defines the scope of resources, allows project administrators and collaborators to manage resources, and restricts and tracks the user’s resources with quotas and limits.
+
+A project is a Kubernetes namespace with additional annotations. It is the central vehicle for managing access to resources for regular users. A project lets a community of users organize and manage their content in isolation from other communities. Users must receive access to projects from administrators. But cluster administrators can allow developers to create their own projects, in which case users automatically have access to their own projects.
+
+Each project has its own set of objects, policies, constraints, and service accounts. **Projects are also known as namespaces**.
+
+
 ## Getting Started with OpenShift
 
 ### Installation Methods - OpenShift
@@ -137,18 +185,40 @@ From a Kubernetes prespective, this is pretty much the same thing as setting us 
 
 ## Build Configuration Strategy 
 There are **four** strategies to create the build configuration. 
-1. **Source-to-Image:** 
-    - Source-to-Image is a tool to create Docker-formated container images. 
-    - It produces ready-to-run images, it injects the application source code into the container image and it assembles a new image.  
-2. **Pipeline:**
-    - Pipeline is a strategy to define a Jenkins pipeline so we can execute it via the Jenkins plugin. 
-    - Build itself is going to be started, it's going to be monitored, it's going to be managed all by OpenShift. 
-    - It's defined in a Jenkins file, but it's all managed via OpenShift. 
-3. **Docker:**
+
+[Documentation Reference](https://docs.openshift.com/container-platform/4.12/cicd/builds/build-strategies.html) 
+
+1. **Source-to-Image (S2I) build:** 
+    - Source-to-image (S2I) is a tool for building reproducible container images. 
+    - It produces ready-to-run images by injecting application source into a container image and assembling a new image. 
+    - The new image incorporates the base image, the builder, and built source and is ready to use with the buildah run command. 
+    - S2I supports incremental builds, which re-use previously downloaded dependencies, previously built artifacts, and so on.
+  
+2. **Pipeline build:**
+    - The Pipeline build strategy allows developers to define a Jenkins pipeline for use by the Jenkins pipeline plugin. 
+    - The build can be started, monitored, and managed by OpenShift Container Platform in the same way as any other build type.
+    - Pipeline workflows are defined in a `jenkinsfile`, either embedded directly in the build configuration, or supplied in a Git repository and referenced by the build configuration.
+    - Pipelines give us control over building, deploying, and promoting our applications on OpenShift Container Platform. 
+    - Using a combination of the Jenkins Pipeline build strategy, `jenkinsfiles`, and the OpenShift Container Platform Domain Specific Language (DSL) provided by the Jenkins Client Plugin, we can create advanced build, test, deploy, and promote pipelines for any scenario.
+
+3. **Docker build:**
+    - OpenShift Container Platform uses **_Buildah_** to build a container image from a Dockerfile.
     - Docker is just like the Docker build command, which used Dockerfile. 
     - With this strategy, it is going to expect a Dockerfile in the sampe repo as the code. 
-4. **Custom:**
-    - The custom build strategy helps developers define a custom builder image. 
+4. **Custom build:**
+    - The custom build strategy allows developers to define a specific builder image responsible for the entire build process. 
+    - Using our own builder image allows us to customize our build process.
+    - A custom builder image is a plain container image embedded with build process logic, for example for building RPMs or base images.
+    - Custom builds run with a high level of privilege and are not available to users by default. 
+    - Only users who can be trusted with cluster administration permissions should be granted access to run custom builds.
     - It's a plain Docker-formatted container image embedded with build process logic. 
-    - For example, we can build rpms, we can build base images. 
-    - It's essentially a custom builder. 
+
+### Build Input
+The build configuration is going to come **build input**. Following are Build Inputs of build config:
+1. **Git:** Any type of Git source control system where code exists. 
+2. **Dockerfile:** We can use a Dockerfile for our build configuration. 
+3. **Binary:** It pulls a binary from a local file system. 
+4. **Image:** An image source, those as just additional files that can be provided for the build image process. It feals more or less identical to a Dockerfile. We can specifiy images, their tags, ans where they can be referenced from. 
+5. **Input Secrets:** If we're building something and it requires specific credentials or some type of other configuration to access dependent resources based on secrets, or config maps. We can define a secrets input so our application can do any type of authentication, authorization that it ultimate;y needs. 
+6. **External Artifacts:** We used to take binaries like a Java jar, and we used to pop it onto a server and then we used to run Java jar command that would bring up our application and binary. 
+
