@@ -80,6 +80,31 @@ A project is a Kubernetes namespace with additional annotations. It is the centr
 
 Each project has its own set of objects, policies, constraints, and service accounts. **Projects are also known as namespaces**.
 
+## OpenShift Container Platform architecture
+OpenShift Container Platform is a platform for developing and running containerized applications. It is designed to allow applications and the data centers that support them to expand from just a few machines and applications to thousands of machines that serve millions of clients.
+
+With its foundation in Kubernetes, OpenShift Container Platform incorporates the same technology that serves as the engine for massive telecommunications, streaming video, gaming, banking, and other applications. Its implementation in open Red Hat technologies lets you extend your containerized applications beyond a single cloud to on-premise and multi-cloud environments.
+
+[Doc Ref](https://docs.openshift.com/container-platform/4.10/architecture/architecture.html)
+
+![openshift-container-platform-architecture](./images/openshift-container-platform-architecture.png)
+
+### OpenShift Container Platform overview
+OpenShift Container Platform provides enterprise-ready enhancements to Kubernetes, including the following enhancements:
+- Hybrid cloud deployments. You can deploy OpenShift Container Platform clusters to a variety of public cloud platforms or in your data center.
+- Integrated Red Hat technology. Major components in OpenShift Container Platform come from Red Hat Enterprise Linux (RHEL) and related Red Hat technologies. OpenShift Container Platform benefits from the intense testing and certification initiatives for Red Hat’s enterprise quality software.
+- Open source development model. Development is completed in the open, and the source code is available from public software repositories. This open collaboration fosters rapid innovation and development.
+
+Although Kubernetes excels at managing your applications, it does not specify or manage platform-level requirements or deployment processes. Powerful and flexible platform management tools and processes are important benefits that OpenShift Container Platform 4.10 offers. The following sections describe some unique features and benefits of OpenShift Container Platform.
+
+### OpenShift Container Platform lifecycle
+The following figure illustrates the basic OpenShift Container Platform lifecycle:
+- Creating an OpenShift Container Platform cluster
+- Managing the cluster
+- Developing and deploying applications
+- Scaling up applications
+
+![High-level-OpenShift-Container-Platform-overview](./images/High-level-OpenShift-Container-Platform-overview.png)
 
 ## Getting Started with OpenShift
 
