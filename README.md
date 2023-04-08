@@ -134,3 +134,21 @@ As a user we need to access any application via URL. In OpenShift, that's exactl
 A route is exposing a service that's running inside of OpenShift to a hostname. For example Google was running on OpenShift, we want to access at www.google.com. Google would have some containers running inside of OpenShift ant those containers, or Pods, rather, would be pointing to some type of service and that service would then be exposed to the world so people can read Google. 
 
 From a Kubernetes prespective, this is pretty much the same thing as setting us a Load Balancer in from of our service, so we can access it via the Load Balancer IP or the Load Balancer hostname or any DNS name. 
+
+## Build Configuration Strategy 
+There are **four** strategies to create the build configuration. 
+1. **Source-to-Image:** 
+    - Source-to-Image is a tool to create Docker-formated container images. 
+    - It produces ready-to-run images, it injects the application source code into the container image and it assembles a new image.  
+2. **Pipeline:**
+    - Pipeline is a strategy to define a Jenkins pipeline so we can execute it via the Jenkins plugin. 
+    - Build itself is going to be started, it's going to be monitored, it's going to be managed all by OpenShift. 
+    - It's defined in a Jenkins file, but it's all managed via OpenShift. 
+3. **Docker:**
+    - Docker is just like the Docker build command, which used Dockerfile. 
+    - With this strategy, it is going to expect a Dockerfile in the sampe repo as the code. 
+4. **Custom:**
+    - The custom build strategy helps developers define a custom builder image. 
+    - It's a plain Docker-formatted container image embedded with build process logic. 
+    - For example, we can build rpms, we can build base images. 
+    - It's essentially a custom builder. 
