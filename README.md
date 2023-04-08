@@ -126,3 +126,11 @@ At a hight level a build essentially takes code and transforms that code into a 
 This is same thing as, for example, having a Dockerfile, and when we run `docker build` command and it creates that container image. That's a container image creation process, very much the same as an OpenShift build. 
 
 Now, a build config is the actual configuration that takes place to take that source code and create a container image of it. Typically, these build configs are automatically created for us via a build strategy. This build config file is typically created automatically, so we don't have to manually create it.  
+
+## Routes
+As a user we need to access any application via URL. In OpenShift, that's exactly what our route is done. 
+
+**Definition**
+A route is exposing a service that's running inside of OpenShift to a hostname. For example Google was running on OpenShift, we want to access at www.google.com. Google would have some containers running inside of OpenShift ant those containers, or Pods, rather, would be pointing to some type of service and that service would then be exposed to the world so people can read Google. 
+
+From a Kubernetes prespective, this is pretty much the same thing as setting us a Load Balancer in from of our service, so we can access it via the Load Balancer IP or the Load Balancer hostname or any DNS name. 
