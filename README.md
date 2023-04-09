@@ -247,3 +247,19 @@ The build configuration is going to come **build input**. Following are Build In
 5. **Input Secrets:** If we're building something and it requires specific credentials or some type of other configuration to access dependent resources based on secrets, or config maps. We can define a secrets input so our application can do any type of authentication, authorization that it ultimate;y needs. 
 6. **External Artifacts:** We used to take binaries like a Java jar, and we used to pop it onto a server and then we used to run Java jar command that would bring up our application and binary. 
 
+
+## Installing an OpenShift cluster on AWS with customizations
+In OpenShift Container Platform version 4.12, we can install a customized cluster on infrastructure that the installation program provisions on Amazon Web Services (AWS). To customize the installation, we need to modify parameters in the `install-config.yaml` file before installing the cluster.
+
+### Pre-Requisites
+Following prerequisites must be met before OpenShift cluster provisioning.
+- Configure an **AWS account** to host the cluster.
+- An **IAM user** with **Admin access**.  
+- An **installer machine** to start the provisioning step. 
+    - We can have a Virtual Machine on AWS acting as installer machine. 
+- A **Domain name** to access the application deployed on OpenShift cluster.
+- A RedHat account. 
+
+
+
+
