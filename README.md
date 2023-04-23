@@ -158,6 +158,19 @@ CodeReady Containers (CRS) exhibits following properties:
 
 **Step 3:** Start CodeReady Containers using `crc start` command. 
 
+#### Upgrade CodeReady Containers Steps
+
+**Step 1:** Download the latest release. Extract the contents somewhare in PATH. 
+
+**Step 2:** Delete the existing VM using `crc delete` command. 
+
+**Step 3:** Replace CRC binary and verify using `crc version` command. 
+
+**Step 4:** Setup CodeReady Containers using `crc setup` command. 
+
+**Step 5:** Start CodeReady Containers using `crc start` command. 
+
+
 ### Install - Multi-Node CLuster 
 The portal has two sections, the **developer** and the **administrator**. There is the observability piece of OpenShift wher we can see metrics, alerts, events, etc. 
 
