@@ -185,6 +185,113 @@ Run the `oc get co` command to check the OpenShift Cluster Operators.
 
 <img src="./images/5-access-openshift.png" />
 
+
+#### Creating an HTPasswd File and an HTPasswd Secret  
+
+**Create or update htpasswd file** 
+
+`htpasswd -c -B -b </path_to/htpasswd_file> <user_name> <password>`
+
+**Append to or update credentials** 
+
+`htpasswd -b </path_to/htpasswd_file> <user_name> <password>`
+
+**Create the HTPasswd secret**
+
+`oc create secret generic htpass-secret --from-file=</path_to/htpasswd_file> -n openshift-config`
+
+#### Adding the HTPasswd Identity Provider  
+
+**HTPasswd Custom Resource (CR)**
+
+```
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec: 
+  identityProviders: 
+    - name: my_htpasswd_provider 
+      mappingMethod: claim 
+      type: HTPasswd 
+      htpasswd: 
+        fileData:
+          name: htpasswd-secret
+```
+
+**Apply the defined CR**
+
+`oc apply -f <path_to/CR>`
+
+**Test by logging in as a user in the file**
+
+`oc login -u <username>`
+
+**Confirm the user is logged in successfully**
+
+`oc whoami`
+
+#### Adding the User to HTPasswd Identity Provider
+
+**Confirm HTPasswd secret name**
+
+`oc get secret -n openshift-config`
+
+**Extract the secret to a HTPasswd file**
+
+`oc extract secret/HTPASSWD_SECRET --to - -n openshift-config > htpasswd`
+
+**Add user(s) to the HTPasswd file**
+
+`htpasswd -B -b htpasswd <username> <password>`
+
+**Replace secret with new secret**
+
+`oc create secret generic HTPASSWD_SECRET --from-file=htpasswd --dry-run -o yaml -n openshift-config | oc replace -f -`
+
+**Check identity**
+
+`oc get identity`
+
+**Check access**
+
+`oc login -u <username>`
+
+`oc get users`
+
+#### Deleting User(s) from HTPasswd Identity Provider
+
+**Confirm HTPasswd secret name**
+
+`oc get secret -n openshift-config`
+
+**Extract the secret to a HTPasswd file**
+
+`oc extract secret/HTPASSWD_SECRET --to - -n openshift-config > htpasswd`
+
+**Edit HTPasswd file**
+
+`vim htpasswd`
+
+**Replace secret with new secret**
+
+`oc create secret generic HTPASSWD_SECRET --from-file=htpasswd --dry-run -o yaml -n openshift-config | oc replace -f -`
+
+**Remove identity**
+
+`oc get identity`
+
+`oc delete identity/HTPASSWD_PROVIDER:<username>`
+
+**Remove user**
+
+`oc get users`
+
+`oc delete user/<username>`
+
+
+
+
 ### Install - Multi-Node CLuster 
 The portal has two sections, the **developer** and the **administrator**. There is the observability piece of OpenShift wher we can see metrics, alerts, events, etc. 
 
@@ -314,6 +421,8 @@ The build configuration is going to come **build input**. Following are Build In
 5. **Input Secrets:** If we're building something and it requires specific credentials or some type of other configuration to access dependent resources based on secrets, or config maps. We can define a secrets input so our application can do any type of authentication, authorization that it ultimate;y needs. 
 6. **External Artifacts:** We used to take binaries like a Java jar, and we used to pop it onto a server and then we used to run Java jar command that would bring up our application and binary. 
 
+------------------
+
 ## Command-Line Tool  
 Download the CLI tool from the Infrastructure Provider page. Then extracc it and place it in a directory that is on PATH. 
 
@@ -416,4 +525,6 @@ Download the CLI tool from the Infrastructure Provider page. Then extracc it and
 **A stream of container logs from pod backend**
 
 `oc logs -f poc/backend -c <container_name>`
+
+-----------------
 
