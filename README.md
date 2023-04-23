@@ -170,6 +170,18 @@ CodeReady Containers (CRS) exhibits following properties:
 
 **Step 5:** Start CodeReady Containers using `crc start` command. 
 
+#### Upgrade OpenShift from the CLI
+**Step 1:** Add the `oc` binary to the PATH
+
+Run the `crc oc-env` to print the command needed to add **oc** to your **PATH**. 
+
+**Step 2:** Login to OpenShift 
+
+Run the `crc console --credentials` to view the login credentials for the cluster.  
+
+**Step 3:** Test the oc command
+
+Run the `oc get co` command to check the OpenShift Cluster Operators.  
 
 ### Install - Multi-Node CLuster 
 The portal has two sections, the **developer** and the **administrator**. There is the observability piece of OpenShift wher we can see metrics, alerts, events, etc. 
