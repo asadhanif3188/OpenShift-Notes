@@ -391,3 +391,29 @@ Download the CLI tool from the Infrastructure Provider page. Then extracc it and
 
 `oc rsync`
 
+### Print the Logs for a Resource
+
+**Stream the logs of the most recent build config**
+
+`oc logs -f bc/<buildconfig_name>`
+
+**Stream the logs of the latest delopyment**
+
+`oc logs -f dc/<deploymentconfig_name>`
+
+**Stream the logs of the first delopyment**
+
+`oc logs --version=1 dc/<deploymentconfig_name>`
+
+**Stream the logs of Pods**
+
+`oc logs -f pod/<pod_name> --tail=5`
+
+**Return a container snapshot from pod backend**
+
+`oc logs backend -c <container_name>`
+
+**A stream of container logs from pod backend**
+
+`oc logs -f poc/backend -c <container_name>`
+
