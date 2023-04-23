@@ -323,7 +323,17 @@ Download the CLI tool from the Infrastructure Provider page. Then extracc it and
 
 #### Create a project
 
-`oc new-project my-project`
+`oc new-project <project_name> --description="<description>" --display-name="<display_name>"`
+
+#### View and Change Projects
+
+`oc get projects`
+
+`oc project <project_name>`
+
+#### Delete a Project
+
+`oc delete project <project_name>`
 
 #### View status of current project
 
