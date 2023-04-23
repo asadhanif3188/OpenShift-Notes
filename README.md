@@ -124,10 +124,39 @@ CodeReady Containers (CRS) exhibits following properties:
     - Since it is ephemeral, it is not good to use it in a production environment. 
     - Good for learning and developing bit not for production-level apps and services. 
 
+#### Pre-Requisites to setup CRC
 
-To install the pre-req for code-ready container, run following command. 
+**Hardware Requirements** 
+1. Needs 4 virtual CPUs (vCPUs)
+2. Needs 9 GB free memory (RAM)
+3. Need 35 GB free storage
 
-`crc setup`
+**Operating System Requirements** 
+1. Windows: 
+    - Windows 10 Pro or newer 
+2. macOS: 
+    - macOS 10.12 Sierra or newer 
+3. Linux:
+    - RHEL/CentOS 7.5 or newer
+    - Fedora - 2 latest stable releases
+    - Ubuntu 18.04 LTS
+    - Debian 10 or newer 
+
+**Required SOftware Packages** 
+
+| Linux Distributions | Installation Commands |
+|---------|-----------|
+| Fedora | `sudo dnf install NetworkManager` |
+| RHEL/CentOS | `su -c 'yum install NetworkManager'` |
+| Debian/Ubuntu | `sudo apt install qemu-kvm libvirt-daemon libvirt-daemon-system network-manager` |
+
+#### Installation Steps
+
+**Step 1:** Download the latest release. Extract the contents somewhare in PATH. 
+
+**Step 2:** Setup CodeReady Containers using `crc setup` command. 
+
+**Step 3:** Start CodeReady Containers using `crc start` command. 
 
 ### Install - Multi-Node CLuster 
 The portal has two sections, the **developer** and the **administrator**. There is the observability piece of OpenShift wher we can see metrics, alerts, events, etc. 
