@@ -317,41 +317,77 @@ The build configuration is going to come **build input**. Following are Build In
 ## Command-Line Tool  
 Download the CLI tool from the Infrastructure Provider page. Then extracc it and place it in a directory that is on PATH. 
 
-#### Login to the Cluster
+**Login to the Cluster**
 
 `oc login`
 
-#### Create a project
+**View status of current project**
+
+`oc status`
+
+**Create a new app**
+
+`oc new-app https://github.com/asadhnaif3188/repo-name`
+
+**View pods**
+
+`oc get pods -o wide`
+
+**View pod logs**
+
+`oc logs pod-name`
+
+**List supported APIs**
+
+`oc api-resources`
+
+### Commands to Manage Projects 
+
+**Create a project**
 
 `oc new-project <project_name> --description="<description>" --display-name="<display_name>"`
 
-#### View and Change Projects
+**View and Change Projects**
 
 `oc get projects`
 
 `oc project <project_name>`
 
-#### Delete a Project
+**Delete a Project**
 
 `oc delete project <project_name>`
 
-#### View status of current project
+### Commands to Manipulate Kubernetes Resources
 
-`oc status`
+**Export resources to a YAML file**
 
-#### Create a new app
+`oc get -o yaml <resource> > <resource>.yaml`
 
-`oc new-app https://github.com/asadhnaif3188/repo-name`
+**Export resources to a JSON file**
 
-#### View pods
+`oc get -o json <resource> > <resource>.json`
 
-`oc get pods -o wide`
+**Create a resource from a YAML file**
 
-#### View pod logs
+`oc create -f <resource>.yaml`
 
-`oc logs pod-name`
+**Create a resource from a JSON file**
 
-#### List supported APIs
+`oc create -f <resource>.json`
 
-`oc api-resources`
+**Replace a resource by filename or stdin**
+
+`oc replace`
+
+**Extract secrets or ConfigMap to disk**
+
+`oc extract`
+
+**Apply a config to a resource by filename or stdin**
+
+`oc apply`
+
+**Copy files between file system and a pod**
+
+`oc rsync`
 
