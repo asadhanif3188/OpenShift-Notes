@@ -183,6 +183,8 @@ Run the `crc console --credentials` to view the login credentials for the cluste
 
 Run the `oc get co` command to check the OpenShift Cluster Operators.  
 
+<img src="./images/5-access-openshift.png" />
+
 ### Install - Multi-Node CLuster 
 The portal has two sections, the **developer** and the **administrator**. There is the observability piece of OpenShift wher we can see metrics, alerts, events, etc. 
 
@@ -312,31 +314,34 @@ The build configuration is going to come **build input**. Following are Build In
 5. **Input Secrets:** If we're building something and it requires specific credentials or some type of other configuration to access dependent resources based on secrets, or config maps. We can define a secrets input so our application can do any type of authentication, authorization that it ultimate;y needs. 
 6. **External Artifacts:** We used to take binaries like a Java jar, and we used to pop it onto a server and then we used to run Java jar command that would bring up our application and binary. 
 
-<!-- 
-## Installing an OpenShift cluster on AWS with customizations
-In OpenShift Container Platform version 4.12, we can install a customized cluster on infrastructure that the installation program provisions on Amazon Web Services (AWS). To customize the installation, we need to modify parameters in the `install-config.yaml` file before installing the cluster.
+## Command-Line Tool  
+Download the CLI tool from the Infrastructure Provider page. Then extracc it and place it in a directory that is on PATH. 
 
-### Pre-Requisites
-Following prerequisites must be met before OpenShift cluster provisioning.
-- Configure an **AWS account** to host the cluster.
-- An **IAM user** with **Admin access**.  
-- An **installer machine** to start the provisioning step. 
-    - We can have a Virtual Machine on AWS acting as installer machine. 
-- A **Domain name** to access the application deployed on OpenShift cluster.
-- A RedHat account. 
+#### Login to the Cluster
 
+`oc login`
 
-### Step 1: Create a Public Hosted Zone using the Route 53 
-I have already acquired domain name, i.e. **asadhanif.dev**, from Namecheap, Inc. 
+#### Create a project
 
-Sign in to the **AWS Management Console** and open the **Route 53 console** at https://console.aws.amazon.com/route53/.
+`oc new-project my-project`
 
-In the Create Hosted Zone pane, enter the name of the domain to route traffic for. Following image is presenting the created public hosted zone. 
+#### View status of current project
 
-<img src="./images/1-public-hosted-zone.png" width="90%" />
+`oc status`
 
-Next step is to update the DNS records at Namecheap. 
+#### Create a new app
 
-<img src="./images/2-namecheap-dns-records.png" width="90%" /> 
--->
+`oc new-app https://github.com/asadhnaif3188/repo-name`
+
+#### View pods
+
+`oc get pods -o wide`
+
+#### View pod logs
+
+`oc logs pod-name`
+
+#### List supported APIs
+
+`oc api-resources`
 
