@@ -114,6 +114,17 @@ First of all create RedHat [account](https://www.redhat.com/wapps/ugc/register.h
 ### Install - Single Node using CRC 
 Got to [console.redhat.com/openshift](http://console.redhat.com/openshift), and install code-ready containers (CRC). It is just like Docker Desktop. It just sits locally, it's in task bar, we can open it up. We can use OpenShift locally just on like a dev style cluster, e.g. Docker Desptop, Minikube, etc. Click on create cluster, from the poratl, and choose local option and follow the steps of installation. 
 
+CodeReady Containers (CRS) exhibits following properties:
+1. Runs in a Single VM
+    - Bring a minimal OpenShift 4 cluster to laptop/desktop for development and testing.
+2. Easy Setup
+    - The CRC CLI makes it east to install and interact with the VM.
+    - It also allows for easy configuration. 
+3. It is Ephemeral
+    - Since it is ephemeral, it is not good to use it in a production environment. 
+    - Good for learning and developing bit not for production-level apps and services. 
+
+
 To install the pre-req for code-ready container, run following command. 
 
 `crc setup`
@@ -247,7 +258,7 @@ The build configuration is going to come **build input**. Following are Build In
 5. **Input Secrets:** If we're building something and it requires specific credentials or some type of other configuration to access dependent resources based on secrets, or config maps. We can define a secrets input so our application can do any type of authentication, authorization that it ultimate;y needs. 
 6. **External Artifacts:** We used to take binaries like a Java jar, and we used to pop it onto a server and then we used to run Java jar command that would bring up our application and binary. 
 
-
+<!-- 
 ## Installing an OpenShift cluster on AWS with customizations
 In OpenShift Container Platform version 4.12, we can install a customized cluster on infrastructure that the installation program provisions on Amazon Web Services (AWS). To customize the installation, we need to modify parameters in the `install-config.yaml` file before installing the cluster.
 
@@ -269,10 +280,9 @@ Sign in to the **AWS Management Console** and open the **Route 53 console** at h
 In the Create Hosted Zone pane, enter the name of the domain to route traffic for. Following image is presenting the created public hosted zone. 
 
 <img src="./images/1-public-hosted-zone.png" width="90%" />
-<!-- ![public-hosted-zone](./images/1-public-hosted-zone.png) -->
 
 Next step is to update the DNS records at Namecheap. 
 
-<img src="./images/2-namecheap-dns-records.png" width="90%" />
-<!-- ![namecheap-dns-records](./images/2-namecheap-dns-records.png) -->
+<img src="./images/2-namecheap-dns-records.png" width="90%" /> 
+-->
 
