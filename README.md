@@ -289,6 +289,29 @@ spec:
 
 `oc delete user/<username>`
 
+#### Modifying a User's Password in the HTPasswd Identity Provider
+
+**Confirm HTPasswd secret name**
+
+`oc get secret -n openshift-config`
+
+**Extract the secret to a HTPasswd file**
+
+`oc extract secret/HTPASSWD_SECRET --to - -n openshift-config > htpasswd`
+
+**Modify the user's password in the HTPasswd file**
+
+`htpasswd -B -b htpasswd <username> <new_password>`
+
+**Replace secret with new secret**
+
+`oc create secret generic HTPASSWD_SECRET --from-file=htpasswd --dry-run -o yaml -n openshift-config | oc replace -f -`
+
+**Check access**
+
+`oc login -u <username>`
+
+
 
 
 
