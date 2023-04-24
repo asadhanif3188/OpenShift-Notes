@@ -342,6 +342,30 @@ spec:
 
 `oc delete secrets kubeadmin -n kube-system`
 
+#### Create and Manage Groups
+
+**Create a new group**
+
+`oc adm groups new <group>`
+
+**Create a new group with one user**
+
+`oc adm groups new <group> <user>`
+
+**Add users to an existing group**
+
+`oc adm groups add-users <group> <user1> <user2>`
+
+**Remove users to an existing group**
+
+`oc adm groups remove-users <group> <user1> <user2>`
+
+**Default Virtual Group**
+- `system:authenticated`
+- `system:authenticated:oauth`
+- `system:unauthenticated`
+
+
 
 
 ### Install - Multi-Node CLuster 
