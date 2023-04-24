@@ -311,7 +311,14 @@ spec:
 
 `oc login -u <username>`
 
-
+#### Default Cluster Roles
+1. `admin`: Has rights to view any resource in the project and modify any resource in the project except for quota. 
+2. `basic-user`: Can get basic information about projects and users. 
+3. `cluster-admin`: Super-user that can perform any action in any project. When bound to a specific project, the user has full control of quota and every action on every resource in the project. 
+4. `cluster-status`: Can get basic cluster status information. 
+5. `edit`: Can modify most objects in a project but does not have the power to view or modify roles or bindings. 
+6. `self-provisioner`: Can create their own projects. 
+7. `view`: Can't make any modifications, but can see most objects in a project. Can't view or modify roles or bindings. 
 
 
 
