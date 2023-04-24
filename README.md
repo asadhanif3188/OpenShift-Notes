@@ -320,6 +320,28 @@ spec:
 6. `self-provisioner`: Can create their own projects. 
 7. `view`: Can't make any modifications, but can see most objects in a project. Can't view or modify roles or bindings. 
 
+#### Adding Roles
+
+**Add a role to a user**
+
+`oc adm policy add-role-to-user <role> <user> -n <project>`
+
+**Add a role to a group**
+
+`oc adm policy add-role-to-group <role> <group> -n <project>`
+
+**Verify by viewing the local rolebinding**
+
+`oc describe rolebinding.rbac -n <project>`
+
+**Creating a cluster admin**
+
+`oc adm policy add-cluster-role-to-user cluster-admin <user>`
+
+**Remove the `kubeadmin` user**
+
+`oc delete secrets kubeadmin -n kube-system`
+
 
 
 ### Install - Multi-Node CLuster 
