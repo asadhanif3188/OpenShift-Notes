@@ -365,7 +365,23 @@ spec:
 - `system:authenticated:oauth`
 - `system:unauthenticated`
 
+#### Creating Custom Roles  
 
+**Create a local role** 
+
+`oc create role <name> --verb=<verb> --resource=<resource> -n <project>`
+
+Example
+
+`oc create role podview --verb=get --resource=pod -n blue`
+
+**Create a cluster role** 
+
+`oc create clusterrole <name> --verb=<verb> --resource=<resource>`
+
+Example
+
+`oc create clusterrole podviewonly --verb=get --resource=pod`
 
 
 ### Install - Multi-Node CLuster 
